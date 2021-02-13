@@ -4,8 +4,6 @@ import { render } from 'react-dom';
 import {createStore} from 'redux';
 import {connect, Provider} from 'react-redux';
 
-import './styles.scss';
-
 const initialState = {
   count: 0,
 };
@@ -42,4 +40,7 @@ class Counter extends Component {
   }
 }
 
-render(<Counter />, document.getElementById('root'));
+render(
+  <Provider store={store}>
+    <Counter />
+  </Provider>, document.getElementById('root'));
