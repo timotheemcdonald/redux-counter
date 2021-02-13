@@ -25,8 +25,13 @@ const reducer = (state = initialState, action) => {
 
 const store = createStore(reducer);
 
+import './styles.scss'
+
 class Counter extends Component {
   render() {
+
+    const {count, increment} = this.props;
+
     return (
       <main className="Counter">
         <p className="count">0</p>
@@ -39,6 +44,17 @@ class Counter extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {return state};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    increment(){
+      dispatch(incrementValue())
+    }
+  }
+};
+
+connect()(Counter);
 
 render(
   <Provider store={store}>
