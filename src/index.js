@@ -4,6 +4,8 @@ import { render } from 'react-dom';
 import {createStore} from 'redux';
 import {connect, Provider} from 'react-redux';
 
+import './styles.scss'
+
 const initialState = {
   count: 0,
 };
@@ -25,18 +27,19 @@ const reducer = (state = initialState, action) => {
 
 const store = createStore(reducer);
 
-import './styles.scss'
+
 
 class Counter extends Component {
   render() {
 
     const {count, increment} = this.props;
+    console.log({count, increment});
 
     return (
       <main className="Counter">
-        <p className="count">0</p>
+        <p className="count">{count}</p>
         <section className="controls">
-          <button>Increment</button>
+          <button onClick={increment}>Increment</button>
           <button>Decrement</button>
           <button>Reset</button>
         </section>
@@ -54,9 +57,9 @@ const mapDispatchToProps = (dispatch) => {
   }
 };
 
-connect()(Counter);
+const CounterContainer = connect(mapStateToProps, mapDispatchToProps)(Counter);
 
 render(
   <Provider store={store}>
-    <Counter />
+    <CounterContainer />
   </Provider>, document.getElementById('root'));
